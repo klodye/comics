@@ -1,0 +1,21 @@
+name: Run Docker Container
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # This runs the action every day at midnight UTC
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-docker-image .
+
+      - name: Run Docker container
+        run: |
+          docker run my-docker-image
